@@ -1,0 +1,212 @@
+.leadership {
+  min-height: 100vh;
+  background: #f9fafb;
+}
+
+.leadership-hero {
+  background: linear-gradient(to right, #7f1d1d, #b91c1c);
+  padding: 4rem 2rem;
+  text-align: center;
+  color: white;
+}
+
+.leadership-hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.leadership-hero p {
+  font-size: 1.3rem;
+  color: #fecaca;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #7f1d1d;
+  font-weight: bold;
+}
+
+/* Executive Board - Big 6 */
+.executives-section {
+  background: white;
+}
+
+.executives-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 3rem;
+  margin-bottom: 2rem;
+}
+
+.executive-card {
+  background: white;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 3px solid #dc2626;
+}
+
+.executive-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(220, 38, 38, 0.2);
+}
+
+.executive-image-wrapper {
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
+  background: #fee2e2;
+  position: relative;
+}
+
+.executive-image-wrapper::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to top, rgba(127, 29, 29, 0.7), transparent);
+}
+
+.executive-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.executive-card:hover .executive-image {
+  transform: scale(1.05);
+}
+
+.executive-info {
+  padding: 2rem;
+  text-align: center;
+  background: linear-gradient(to bottom, white, #fef2f2);
+}
+
+.executive-info h3 {
+  font-size: 1.5rem;
+  color: #7f1d1d;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.executive-info .position {
+  font-size: 1.1rem;
+  color: #dc2626;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.executive-info .bio {
+  color: #6b7280;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* Delegates Section */
+.delegates-section {
+  background: #f3f4f6;
+}
+
+.delegates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.delegate-card {
+  background: white;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 2px solid #fee2e2;
+}
+
+.delegate-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.delegate-image-wrapper {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  background: #fee2e2;
+}
+
+.delegate-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.delegate-card:hover .delegate-image {
+  transform: scale(1.1);
+}
+
+.delegate-info {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.delegate-info h4 {
+  font-size: 1.2rem;
+  color: #7f1d1d;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.delegate-info .position {
+  font-size: 0.95rem;
+  color: #dc2626;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .leadership-hero h1 {
+    font-size: 2rem;
+  }
+
+  .leadership-hero p {
+    font-size: 1.1rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .executives-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .delegates-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .executive-image-wrapper {
+    height: 300px;
+  }
+
+  .delegate-image-wrapper {
+    height: 250px;
+  }
+}
