@@ -47,49 +47,119 @@ import leader44 from '../assets/images/leader44.jpg';
 import leader45 from '../assets/images/leader45.jpg';
 import leader46 from '../assets/images/leader46.jpg';
 // import leader48 from '../assets/images/leader48.jpg';
+// import leader49 from '../assets/images/leader49.jpg';
+// import leader50 from '../assets/images/leader50.jpg';
 
 function Leadership() {
-  // Big 6 Executive Positions
-  const executives = [
+  // Big 10 Executive Positions (Congress Excos)
+  const congressExcos = [
     {
-      name: 'Ikechi Eguzoikpe',
-      position: 'Coordinator',
-      image: leader1,
-      // bio: 'Leading with vision and dedication'
+      name: 'Engr.Solomon Ohia',
+      position: 'President',
+      image: leader14,
     },
     {
-      name: 'Ndudim Adindu',
-      position: 'Deputy Coordinator',
-      image: leader2,
-      // bio: 'Supporting leadership excellence'
+      name: 'Mr.Azubuike Anyanwu',
+      position: 'Vice President',
+      image: leader33,
     },
     {
-      name: 'Ebere Nwakanma',
-      position: 'Secretary',
-      image: leader3,
-      // bio: 'Ensuring smooth operations'
+      name: 'Mr.Ikenna Onumadu',
+      position: 'Secretary-General',
+      image: leader40,
     },
     {
-      name: 'Munachim Aquomba',
-      position: 'Assistant Secretary',
-      image: leader4,
-      // bio: 'Supporting administrative functions'
+      name: 'Mr.Christain Omeonu',
+      position: 'Director of Finance',
+      image: leader36,
     },
     {
-      name: 'Nnam Obia',
-      position: 'Treasurer/Financial Secretary',
-      image: leader5,
-      // bio: 'Managing financial resources'
+      name: 'Mr.Justice Chimezie Nwakanna',
+      position: 'Director of community service',
+      image: leader43,
     },
     {
-      name: 'Ihuoma Emelogu',
-      position: 'Publicity Secretary',
-      image: leader6,
-      // bio: 'Building community relationships'
+      name: 'Mr.Kelechi Ojogho',
+      position: 'Director of Welfare',
+      image: null, // leader49 - placeholder
+    },
+    {
+      name: 'Mr.Chimezie Akpulonu',
+      position: 'Director of Publicity',
+      image: leader37,
+    },
+    {
+      name: 'Barrister Emeka Enwereji',
+      position: 'Sargent of Arms',
+      image: null, // Using null instead of duplicate leader40
+    },
+    {
+      name: 'Mr.Charles Nwanmah',
+      position: 'Assistant Director of Finance',
+      image: leader46,
+    },
+    {
+      name: 'Mr.Obioma Ochulor',
+      position: 'Assistant Secretary-General',
+      image: null, // leader51 - placeholder
     }
   ];
 
-  // All Delegates (1-48)
+  // Diaspora Chapter
+  const diasporaChapter = [
+    {
+      name: 'Mr.Emenike Ihekoronye',
+      position: 'Coordinator',
+      image: leader12,
+    },
+    {
+      name: 'Mr.Obinna Onyekwere',
+      position: 'Secretary',
+      image: leader35,
+    }
+  ];
+
+  // Home Chapter
+  const homeChapter = [
+    {
+      name: 'Mr.Ikechi Eguzoikpe',
+      position: 'Coordinator',
+      image: leader8,
+    },
+    {
+      name: 'Elder Ndudim Adindu',
+      position: 'Deputy Coordinator',
+      image: leader2,
+    }
+  ];
+
+  // Lagos Chapter
+  const lagosChapter = [
+    {
+      name: 'Elder Chamberlain Nwaorgu',
+      position: 'Coordinator',
+      image: leader11,
+    },
+    {
+      name: 'Mr.Prince Nwaekpe',
+      position: 'Deputy Coordinator',
+      image: leader32,
+    }
+  ];
+
+  // Create a list of all images used in leadership positions
+  const usedImages = [
+    // Congress Excos
+    leader14, leader33, leader40, leader36, leader43, leader37, leader46,
+    // Diaspora Chapter
+    leader12, leader35,
+    // Home Chapter
+    leader8, leader2,
+    // Lagos Chapter
+    leader11, leader32
+  ].filter(img => img !== null); // Remove null values
+
+  // All Leader Images available
   const allLeaderImages = [
     leader1, leader2, leader3, leader4, leader5, leader6, leader7, leader8,
     leader9, leader10, leader11, leader12, leader13, leader14, leader15, leader16,
@@ -99,7 +169,10 @@ function Leadership() {
     leader41, leader43, leader44, leader45, leader46,
   ];
 
-  const delegates = allLeaderImages.map((image, index) => ({
+  // Filter out images that are already used in leadership positions
+  const delegateImages = allLeaderImages.filter(image => !usedImages.includes(image));
+
+  const delegates = delegateImages.map((image, index) => ({
     name: `Member ${index + 1}`,
     position: 'Delegate',
     image: image
@@ -112,20 +185,83 @@ function Leadership() {
         <p>Meet the dedicated team of August 93 Club - Ohanze Congress</p>
       </div>
 
-      {/* Executive Board - Big 6 */}
+      {/* Congress Excos - Big 10 */}
       <section className="executives-section">
         <div className="container">
-          <h2 className="section-title">Executive Board</h2>
+          <h2 className="section-title">Congress Excos (Big 10)</h2>
           <div className="executives-grid">
-            {executives.map((executive, index) => (
+            {congressExcos.map((executive, index) => (
               <div key={index} className="executive-card">
                 <div className="executive-image-wrapper">
-                  <img src={executive.image} alt={executive.name} className="executive-image" />
+                  {executive.image ? (
+                    <img src={executive.image} alt={executive.name} className="executive-image" />
+                  ) : (
+                    <div className="placeholder-image">Image Coming Soon</div>
+                  )}
                 </div>
                 <div className="executive-info">
                   <h3>{executive.name}</h3>
                   <p className="position">{executive.position}</p>
-                  <p className="bio">{executive.bio}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Diaspora Chapter Section */}
+      <section className="chapter-section diaspora-chapter">
+        <div className="container">
+          <h2 className="section-title">Diaspora Chapter</h2>
+          <div className="chapter-grid">
+            {diasporaChapter.map((leader, index) => (
+              <div key={index} className="chapter-card">
+                <div className="chapter-image-wrapper">
+                  <img src={leader.image} alt={leader.name} className="chapter-image" />
+                </div>
+                <div className="chapter-info">
+                  <h3>{leader.name}</h3>
+                  <p className="position">{leader.position}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Home Chapter Section */}
+      <section className="chapter-section home-chapter">
+        <div className="container">
+          <h2 className="section-title">Home Chapter</h2>
+          <div className="chapter-grid">
+            {homeChapter.map((leader, index) => (
+              <div key={index} className="chapter-card">
+                <div className="chapter-image-wrapper">
+                  <img src={leader.image} alt={leader.name} className="chapter-image" />
+                </div>
+                <div className="chapter-info">
+                  <h3>{leader.name}</h3>
+                  <p className="position">{leader.position}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Lagos Chapter Section */}
+      <section className="chapter-section lagos-chapter">
+        <div className="container">
+          <h2 className="section-title">Lagos Chapter</h2>
+          <div className="chapter-grid">
+            {lagosChapter.map((leader, index) => (
+              <div key={index} className="chapter-card">
+                <div className="chapter-image-wrapper">
+                  <img src={leader.image} alt={leader.name} className="chapter-image" />
+                </div>
+                <div className="chapter-info">
+                  <h3>{leader.name}</h3>
+                  <p className="position">{leader.position}</p>
                 </div>
               </div>
             ))}

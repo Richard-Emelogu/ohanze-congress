@@ -3,9 +3,16 @@ import './Gallery.css';
 import groupPhoto from '../assets/images/group-photo.jpg';
 import groupPhoto2 from '../assets/images/group-photo2.jpg';
 import groupPhoto3 from '../assets/images/group-photo3.jpg';
-// import groupPhoto4 from '../assets/images/group-photo4.jpg';
-// import groupPhoto5 from '../assets/images/group-photo5.jpg';
-// import groupPhoto6 from '../assets/images/group-photo6.jpg';
+import walk1 from '../assets/images/walk1.jpg';
+import walk2 from '../assets/images/walk2.jpg';
+import walk3 from '../assets/images/walk3.jpg';
+import walk4 from '../assets/images/walk4.jpg';
+import walk5 from '../assets/images/walk5.jpg';
+import walk6 from '../assets/images/walk6.jpg';
+import walk7 from '../assets/images/walk7.jpg';
+import walk8 from '../assets/images/walk8.jpg';
+import walk9 from '../assets/images/walk9.jpg';
+import walk10 from '../assets/images/walk10.jpg';
 
 function Gallery() {
   const galleryImages = [
@@ -27,24 +34,66 @@ function Gallery() {
       title: 'Community Outreach',
       description: 'Service for advancement in action'
     },
-    // {
-    //   id: 4,
-    //   src: groupPhoto4,
-    //   title: 'Cultural Festival',
-    //   description: 'Celebrating our rich heritage'
-    // },
-    // {
-    //   id: 5,
-    //   src: groupPhoto5,
-    //   title: 'Youth Empowerment Program',
-    //   description: 'Investing in the next generation'
-    // },
-    // {
-    //   id: 6,
-    //   src: groupPhoto6,
-    //   title: 'Leadership Summit',
-    //   description: 'Strategic planning session'
-    // }
+    {
+      id: 4,
+      src: walk1,
+      title: 'Community Walk',
+      description: 'Promoting health and unity in Ohanze'
+    },
+    {
+      id: 5,
+      src: walk2,
+      title: 'Health Awareness Walk',
+      description: 'Walking for wellness in our community'
+    },
+    {
+      id: 6,
+      src: walk3,
+      title: 'Unity Walk 2024',
+      description: 'Members participating in community exercise'
+    },
+    {
+      id: 7,
+      src: walk4,
+      title: 'Morning Fitness Session',
+      description: 'Club members staying active together'
+    },
+    {
+      id: 8,
+      src: walk5,
+      title: 'Walk for Progress',
+      description: 'Symbolic walk representing our journey forward'
+    },
+    {
+      id: 9,
+      src: walk6,
+      title: 'Community Bonding Walk',
+      description: 'Strengthening bonds through physical activity'
+    },
+    {
+      id: 10,
+      src: walk7,
+      title: 'Health Walk Initiative',
+      description: 'Promoting fitness and well-being'
+    },
+    {
+      id: 11,
+      src: walk8,
+      title: 'Annual Fitness Walk',
+      description: 'Members in action during our yearly walk'
+    },
+    {
+      id: 12,
+      src: walk9,
+      title: 'Walk for Solidarity',
+      description: 'Showing unity through community exercise'
+    },
+    {
+      id: 13,
+      src: walk10,
+      title: 'Final Walk Session',
+      description: 'Concluding our fitness activities for the season'
+    }
   ];
 
   return (
