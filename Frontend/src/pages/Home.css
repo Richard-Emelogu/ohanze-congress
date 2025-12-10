@@ -83,7 +83,11 @@
     padding: 4rem 2rem;
     background: white;
   }
-  
+
+ /* .about-card p {
+  color: red; /* test */
+/* } */ */
+
   .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -125,7 +129,7 @@
     color: #374151;
     line-height: 1.6;
   }
-  
+
   /* CTA Section */
   .cta {
     background: linear-gradient(to right, #7f1d1d, #b91c1c);

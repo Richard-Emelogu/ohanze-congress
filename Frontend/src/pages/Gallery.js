@@ -31,7 +31,7 @@ function Gallery() {
     {
       id: 3,
       src: groupPhoto3,
-      title: 'Community Outreach',
+      title: 'August Retreat 2025',
       description: 'Service for advancement in action'
     },
     {
@@ -49,7 +49,7 @@ function Gallery() {
     {
       id: 6,
       src: walk3,
-      title: 'Unity Walk 2024',
+      title: 'City Walk 2024',
       description: 'Members participating in community exercise'
     },
     {
@@ -73,8 +73,8 @@ function Gallery() {
     {
       id: 10,
       src: walk7,
-      title: 'Health Walk Initiative',
-      description: 'Promoting fitness and well-being'
+      title: 'Igbaga Dance',
+      description: 'Our Dancers in action'
     },
     {
       id: 11,
@@ -85,8 +85,8 @@ function Gallery() {
     {
       id: 12,
       src: walk9,
-      title: 'Walk for Solidarity',
-      description: 'Showing unity through community exercise'
+      title: 'Football cup',
+      description: 'Football cup being given to our capable players by the President 2025: Engr.Solomon Ohia'
     },
     {
       id: 13,

@@ -35,15 +35,21 @@ function Home() {
               <p>
                 To foster community development, preserve cultural traditions, and empower our 
                 members through education, collaboration, and sustainable initiatives that 
-                benefit everyone.
+                benefit everyone We have created a fund account for this cause and we enjoin anybody that his initiative appeals too donate towards it.
               </p>
             </div>
             <div className="about-card">
-              <h3>Our Values</h3>
-              <p>
-                Unity, Progress, Heritage, Excellence, and Community Service form the cornerstone 
-                of everything we do at August 93 Club - Ohanze Congress.
-              </p>
+              <h3>Our Anthem</h3>
+            <p>
+  Blest be the tie that binds <br />
+  Our hearts in fraternal love <br />
+  The fellowship of Congressmen is like to that above. <br />
+  <br />
+  We share our mutual woes our mutual burdens bear <br />
+  Our fears, our hopes, our aims are one. <br />
+  Our comfort and our cares
+</p>
+
             </div>
           </div>
         </div>

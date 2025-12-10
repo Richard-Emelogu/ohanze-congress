@@ -46,9 +46,13 @@ import leader43 from '../assets/images/leader43.jpg';
 import leader44 from '../assets/images/leader44.jpg';
 import leader45 from '../assets/images/leader45.jpg';
 import leader46 from '../assets/images/leader46.jpg';
-// import leader48 from '../assets/images/leader48.jpg';
-// import leader49 from '../assets/images/leader49.jpg';
-// import leader50 from '../assets/images/leader50.jpg';
+import leader47 from '../assets/images/leader47.jpg';
+import leader48 from '../assets/images/leader48.jpg';
+import leader49 from '../assets/images/leader49.jpg';
+import leader50 from '../assets/images/leader50.jpg';
+import leader51 from '../assets/images/leader51.jpg';
+import leader52 from '../assets/images/leader52.jpg';
+import leader53 from '../assets/images/leader53.jpg';
 
 function Leadership() {
   // Big 10 Executive Positions (Congress Excos)
@@ -81,7 +85,7 @@ function Leadership() {
     {
       name: 'Mr.Kelechi Ojogho',
       position: 'Director of Welfare',
-      image: null, // leader49 - placeholder
+      image: leader50, 
     },
     {
       name: 'Mr.Chimezie Akpulonu',
@@ -91,7 +95,7 @@ function Leadership() {
     {
       name: 'Barrister Emeka Enwereji',
       position: 'Sargent of Arms',
-      image: null, // Using null instead of duplicate leader40
+      image: leader49,
     },
     {
       name: 'Mr.Charles Nwanmah',
@@ -101,7 +105,7 @@ function Leadership() {
     {
       name: 'Mr.Obioma Ochulor',
       position: 'Assistant Secretary-General',
-      image: null, // leader51 - placeholder
+      image: leader51,
     }
   ];
 
@@ -147,10 +151,10 @@ function Leadership() {
     }
   ];
 
-  // Create a list of all images used in leadership positions
+  // Leadership position images
   const usedImages = [
     // Congress Excos
-    leader14, leader33, leader40, leader36, leader43, leader37, leader46,
+    leader14, leader33, leader40, leader36, leader43, leader37, leader46, leader49, leader50, leader51,
     // Diaspora Chapter
     leader12, leader35,
     // Home Chapter
@@ -166,17 +170,187 @@ function Leadership() {
     leader17, leader18, leader19, leader20, leader21, leader23, leader24,
     leader25, leader26, leader27, leader28, leader30, leader31, leader32,
     leader33, leader34, leader35, leader36, leader37, leader38, leader39, leader40,
-    leader41, leader43, leader44, leader45, leader46,
+    leader41, leader43, leader44, leader45, leader46, leader48, leader49, leader50, leader51, leader52, leader53,
   ];
 
-  // Filter out images that are already used in leadership positions
-  const delegateImages = allLeaderImages.filter(image => !usedImages.includes(image));
-
-  const delegates = delegateImages.map((image, index) => ({
-    name: `Member ${index + 1}`,
-    position: 'Delegate',
-    image: image
-  }));
+  // Delegates
+  const delegates = [
+    // {
+    //   name: 'Mr.John Doe',
+    //   position: 'Delegate',
+    //   image: leader1,
+    // },
+    {
+      name: 'Mr.Ebere Nwakanma',
+      position: 'Delegate',
+      image: leader3,
+    },
+    {
+      name: 'Mr.Aguwamba Munachi',
+      position: 'Delegate',
+      image: leader4,
+    },
+     {
+      name: 'Mr.Chinwe Ikpeaba',
+      position: 'Delegate',
+      image: leader28,
+    },
+    {
+      name: 'Mr.Nnam Obia',
+      position: 'Delegate',
+      image: leader5,
+    },
+    {
+      name: 'Mr.Tochukwu Emelogu',
+      position: 'Delegate',
+      image: leader52,
+    },
+    {
+      name: 'Mr.Micheal Dimiri',
+      position: 'Delegate',
+      image: leader53,
+    },
+    {
+      name: 'Mr.Ihuoma Emelogu',
+      position: 'Delegate',
+      image: leader6,
+    },
+    {
+      name: 'Mr.Nwangwa Ogechi',
+      position: 'Delegate',
+      image: leader7,
+    },
+    {
+      name: 'Mr.Kelechi Imeoria',
+      position: 'Delegate',
+      image: leader9,
+    },
+    {
+      name: 'Mr.Chidi Ojogho',
+      position: 'Delegate',
+      image: leader10,
+    },
+    {
+      name: 'Mr.Onyekachi Dineya',
+      position: 'Delegate',
+      image: leader13,
+    },
+    {
+      name: 'Mr.Nelson Aaron',
+      position: 'Delegate',
+      image: leader15,
+    },
+    {
+      name: 'Mr.Ikechi Aaron',
+      position: 'Delegate',
+      image: leader16,
+    },
+    {
+      name: 'Mrs.Nnenna Uba',
+      position: 'Delegate',
+      image: leader17,
+    },
+    {
+      name: 'Mr.Boniface Chinyere Nwosu',
+      position: 'Delegate',
+      image: leader18,
+    },
+    {
+      name: 'Mr.Sopuruchi Owen',
+      position: 'Delegate',
+      image: leader19,
+    },
+    {
+      name: 'Mr.Ronald Nwambu',
+      position: 'Delegate',
+      image: leader20,
+    },
+    {
+      name: 'Mr.Stanley Elewachi',
+      position: 'Delegate',
+      image: leader21,
+    },
+    {
+      name: 'Mr.Charles Onuha',
+      position: 'Delegate',
+      image: leader23,
+    },
+    {
+      name: 'Mr.Nkemjika Nnabugwu',
+      position: 'Delegate',
+      image: leader24,
+    },
+    {
+      name: 'Mr.Enyinnaya Ohia',
+      position: 'Delegate',
+      image: leader25,
+    },
+    {
+      name: 'Mr.Goodluck Nwanganga',
+      position: 'Delegate',
+      image: leader26,
+    },
+    {
+      name: 'Mr.Chijindu Amaechi',
+      position: 'Delegate',
+      image: leader27,
+    },
+    {
+      name: 'Mr.Chinwe Ikpeaba',
+      position: 'Delegate',
+      image: leader28,
+    },
+    {
+      name: 'Mr.Nworgu Kenneth',
+      position: 'Delegate',
+      image: leader30,
+    },
+    {
+      name: 'Mrs.Chinwe Emeanuwa',
+      position: 'Delegate',
+      image: leader31,
+    },
+    {
+      name: 'Mr.Kenneth Ochulor',
+      position: 'Delegate',
+      image: leader34,
+    },
+    {
+      name: 'Mrs.Oluchi Atubi',
+      position: 'Delegate',
+      image: leader38,
+    },
+    {
+      name: 'Mr.Ihekoronye Enyeribe',
+      position: 'Delegate',
+      image: leader39,
+    },
+    {
+      name: 'Mrs.Ngozi Atubi',
+      position: 'Delegate',
+      image: leader41,
+    },
+    {
+      name: 'Mr.Chidiadi Alaribe',
+      position: 'Delegate',
+      image: leader44,
+    },
+    {
+      name: 'Mr.Izuchukwu Adindu',
+      position: 'Delegate',
+      image: leader45,
+    },
+    {
+      name: 'Mr.Maraizu Nwoguu',
+      position: 'Delegate',
+      image: leader47,
+    },
+    {
+      name: 'Mr.Ahamefule Emelogu',
+      position: 'Delegate',
+      image: leader48,
+    }
+  ];
 
   return (
     <div className="leadership">
