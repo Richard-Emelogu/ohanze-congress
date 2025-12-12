@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Ohanze Congress</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>🎨 Ohanze Admin</h2>
+                <p>August 93 Club</p>
+            </div>
+            <nav>
+                <a href="#" class="nav-link active" data-tab="products">
+                    📦 Products
+                </a>
+                <a href="#" class="nav-link" data-tab="orders">
+                    🛒 Orders
+                </a>
+                <a href="#" class="nav-link" data-tab="stats">
+                    📊 Statistics
+                </a>
+            </nav>
+            <button class="logout-btn" id="logoutBtn">🚪 Logout</button>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="header">
+                <h1 id="pageTitle">Products Management</h1>
+                <div class="user-info">
+                    <span id="adminName">Admin</span>
+                </div>
+            </header>
+
+            <!-- Products Tab -->
+            <section id="products" class="tab-content active">
+                <div class="action-bar">
+                    <button class="btn-primary" id="addProductBtn">
+                        ➕ Add New Product
+                    </button>
+                </div>
+
+                <div class="products-grid" id="productsGrid">
+                    <div class="loading">Loading products...</div>
+                </div>
+            </section>
+
+            <!-- Orders Tab -->
+            <section id="orders" class="tab-content">
+                <div class="orders-list" id="ordersList">
+                    <div class="loading">Loading orders...</div>
+                </div>
+            </section>
+
+            <!-- Statistics Tab -->
+            <section id="stats" class="tab-content">
+                <div class="stats-grid" id="statsGrid">
+                    <div class="loading">Loading statistics...</div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Add/Edit Product Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle">Add New Product</h2>
+            <form id="productForm">
+                <input type="hidden" id="productId">
+                
+                <div class="form-group">
+                    <label for="productName">Product Name *</label>
+                    <input type="text" id="productName" placeholder="e.g., Ohanze Polo Shirt" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="productDescription">Description *</label>
+                    <textarea id="productDescription" rows="3" placeholder="Describe your product..." required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="productPrice">Price (₦) *</label>
+                        <input type="number" id="productPrice" placeholder="15000" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productCategory">Category *</label>
+                        <select id="productCategory" required>
+                            <option value="">Select category</option>
+                            <option value="polo">Polo Shirt</option>
+                            <option value="cap">Cap</option>
+                            <option value="bangle">Bangle</option>
+                            <option value="accessory">Accessory</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="productStock">Stock Quantity *</label>
+                        <input type="number" id="productStock" value="100" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productSizes">Available Sizes</label>
+                        <input type="text" id="productSizes" placeholder="S, M, L, XL" value="S, M, L, XL">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="productImageUrl">Image URL *</label>
+                    <input type="url" id="productImageUrl" placeholder="https://example.com/image.jpg" required>
+                    <small>Tip: Upload to <a href="https://imgur.com" target="_blank">Imgur</a> and paste the link here</small>
+                </div>
+
+                <div class="image-preview" id="imagePreview"></div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">💾 Save Product</button>
+                    <button type="button" class="btn-secondary" id="cancelBtn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

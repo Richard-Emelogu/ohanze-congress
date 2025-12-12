@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import Leadership from './pages/Leadership';
 import Gallery from './pages/Gallery';
+import Store from './pages/store';
 import AdminLogin from './pages/AdminLogin';
 import AdminRegister from './pages/AdminRegister';
 import './App.css';
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/leadership" element={<Leadership />} />
           <Route path="/gallery" element={<Gallery />} />
+          <Route path="/store" element={<Store />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin/register" element={<AdminRegister />} />
         </Routes>

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Order = require('../models/Order');
 const auth = require('../middleware/auth');
-// const { sendNewOrderNotification, sendOrderConfirmation } = require('../emailService');
+const { sendNewOrderNotification, sendOrderConfirmation } = require('../emailService');
 
 // @route   POST api/orders
 // @desc    Create a new order (with email notifications!)
@@ -12,13 +12,13 @@ router.post('/', async (req, res) => {
     const newOrder = new Order(req.body);
     const order = newOrder.save();
 
-    // 🔔 SEND EMAIL NOTIFICATIONS
+    // 📧 SEND EMAIL NOTIFICATIONS
     console.log('📧 Sending email notifications...');
     
-    // Send email to admin
+    // Send email to admin (won't fail if email not configured)
     await sendNewOrderNotification(order);
     
-    // Send confirmation email to customer
+    // Send confirmation email to customer (won't fail if email not configured)
     await sendOrderConfirmation(order);
 
     res.json({
