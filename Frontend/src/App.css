@@ -588,9 +588,9 @@ button[type="submit"]:hover {
     0 0 40px rgba(255, 215, 0, 0.3) !important;
 }
 
-/* ========================================
+/*
    SMOOTH ANIMATIONS
-   ======================================== */
+*/
 
 @keyframes pageFadeIn {
   from { opacity: 0; }
@@ -620,9 +620,9 @@ button[type="submit"]:hover {
   background: var(--red-gradient-hover);
 }
 
-/* ========================================
+/* 
    RESPONSIVE DESIGN
-   ======================================== */
+ */
 
 @media (max-width: 768px) {
   .admin-title {
