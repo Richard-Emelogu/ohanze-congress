@@ -117,14 +117,21 @@ const delegates = [
   { name: 'Mr. Ebere Nwakanma', image: leader1 },
 ];
 
-function ChapterSection({ title, members, bg }) {
+function ChapterSection({ title, members, bg, onMemberClick }) {
   return (
     <section className="chapter-section" style={{ background: bg }}>
       <div className="container">
         <h2 className="section-title">{title}</h2>
         <div className="chapter-grid">
           {members.map((leader, i) => (
-            <div key={i} className="chapter-card">
+            <div
+              key={i}
+              className="chapter-card"
+              onClick={() => onMemberClick?.(leader)}
+              role={onMemberClick ? 'button' : undefined}
+              tabIndex={onMemberClick ? 0 : undefined}
+              onKeyDown={(e) => onMemberClick && (e.key === 'Enter' || e.key === ' ') && onMemberClick(leader)}
+            >
               <div className="chapter-image-wrapper">
                 <img src={leader.image} alt={leader.name} className="chapter-image" />
               </div>
@@ -142,7 +149,11 @@ function ChapterSection({ title, members, bg }) {
 
 function Leadership() {
   const [showAllDelegates, setShowAllDelegates] = useState(false);
+  const [selectedLeader, setSelectedLeader] = useState(null);
   const visibleDelegates = showAllDelegates ? delegates : delegates.slice(0, 12);
+
+  const openLeaderModal = (leader) => setSelectedLeader({ ...leader, description: leader.position ? `${leader.name} serves as ${leader.position}.` : `${leader.name} is a valued member of the leadership team.` });
+  const closeLeaderModal = () => setSelectedLeader(null);
 
   return (
     <div className="leadership">
@@ -154,10 +165,10 @@ function Leadership() {
       {/* Congress Excos */}
       <section className="executives-section">
         <div className="container">
-          <h2 className="section-title">Congress Excos — Big 10</h2>
+          <h2 className="section-title">Congress Excos</h2>
           <div className="executives-grid">
             {congressExcos.map((exec, i) => (
-              <div key={i} className="executive-card">
+              <div key={i} className="executive-card" onClick={() => openLeaderModal(exec)} role="button" tabIndex={0}>
                 <div className="executive-image-wrapper">
                   {exec.image
                     ? <img src={exec.image} alt={exec.name} className="executive-image" />
@@ -174,9 +185,9 @@ function Leadership() {
         </div>
       </section>
 
-      <ChapterSection title="Diaspora Chapter" members={diasporaChapter} bg="#ffffff" />
-      <ChapterSection title="Home Chapter" members={homeChapter} bg="#f7f6f4" />
-      <ChapterSection title="Lagos Chapter" members={lagosChapter} bg="#ffffff" />
+      <ChapterSection title="Diaspora Chapter" members={diasporaChapter} bg="#ffffff" onMemberClick={openLeaderModal} />
+      <ChapterSection title="Home Chapter" members={homeChapter} bg="#f7f6f4" onMemberClick={openLeaderModal} />
+      <ChapterSection title="Lagos Chapter" members={lagosChapter} bg="#ffffff" onMemberClick={openLeaderModal} />
 
       {/* Delegates */}
       <section className="delegates-section">
@@ -184,7 +195,7 @@ function Leadership() {
           <h2 className="section-title">Our Delegates</h2>
           <div className="delegates-grid">
             {visibleDelegates.map((d, i) => (
-              <div key={i} className="delegate-card">
+              <div key={i} className="delegate-card" onClick={() => openLeaderModal({ ...d, position: d.position || 'Delegate' })} role="button" tabIndex={0}>
                 <div className="delegate-image-wrapper">
                   <img src={d.image} alt={d.name} className="delegate-image" loading="lazy" />
                 </div>
@@ -219,6 +230,20 @@ function Leadership() {
           )}
         </div>
       </section>
+
+      {selectedLeader && (
+        <div className="leadership-modal-overlay" onClick={closeLeaderModal}>
+          <div className="leadership-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="leadership-modal-close" onClick={closeLeaderModal} aria-label="Close details">×</button>
+            <img src={selectedLeader.image} alt={selectedLeader.name} />
+            <div className="leader-details">
+              <h3>{selectedLeader.name}</h3>
+              <p className="position">{selectedLeader.position}</p>
+              <p>{selectedLeader.description}</p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,29 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+* { box-sizing: border-box; }
+
 .dashboard-page {
   min-height: 100vh;
   background: #0d0d0d;
   font-family: Inter, sans-serif;
   color: white;
+  display: flex;
 }
 
+/* ── SIDEBAR ── */
 .dashboard-sidebar {
   position: fixed;
-  left: 0;
-  top: 0;
-  bottom: 0;
+  left: 0; top: 0; bottom: 0;
   width: 240px;
-  background: linear-gradient(180deg,#1a0000 0%,#0d0d0d 100%);
+  background: linear-gradient(180deg, #1a0000 0%, #0d0d0d 100%);
   border-right: 1px solid rgba(255,255,255,0.06);
   padding: 2rem 1rem;
   display: flex;
   flex-direction: column;
   z-index: 100;
+  overflow-y: auto;
 }
 
 .dashboard-main {
   margin-left: 240px;
   padding: 2rem;
+  flex: 1;
+  min-width: 0;
 }
 
+/* ── TOPBAR ── */
 .dashboard-topbar {
   display: flex;
   align-items: center;
@@ -37,11 +45,12 @@
   border-radius: 18px;
 }
 
-.dashboard-tabs {
+/* ── NAV ── */
+.dashboard-nav {
+  flex: 1;
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .dashboard-nav button {
@@ -53,11 +62,18 @@
   border-radius: 10px;
   border: none;
   cursor: pointer;
-  margin-bottom: 4px;
   position: relative;
   text-align: left;
   transition: all 0.2s;
   background: transparent;
+  color: rgba(255,255,255,0.65);
+  font-size: 0.88rem;
+  font-family: Inter, sans-serif;
+}
+
+.dashboard-nav button:hover {
+  background: rgba(255,255,255,0.05);
+  color: white;
 }
 
 .dashboard-nav button.active {
@@ -66,11 +82,11 @@
   font-weight: 600;
 }
 
-.dashboard-nav button span.badge {
+.dashboard-nav button .badge {
   margin-left: auto;
   background: #c41e3a;
   color: white;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 700;
   padding: 2px 7px;
   border-radius: 20px;
@@ -78,48 +94,136 @@
   text-align: center;
 }
 
-.dashboard-user {
-  border-top: 1px solid rgba(255,255,255,0.07);
-  padding-top: 1rem;
+/* ── MOBILE BOTTOM NAV ── */
+.dashboard-mobile-nav {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: #111;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 0.5rem 0.25rem;
+  z-index: 200;
+  gap: 0;
 }
 
-.dashboard-user button {
-  width: 100%;
-  padding: 0.6rem;
-  border-radius: 8px;
-  border: 1px solid rgba(196,30,58,0.3);
+.dashboard-mobile-nav button {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 0.5rem 0.25rem;
   background: transparent;
-  color: #f87171;
-  font-size: 0.82rem;
+  border: none;
+  color: rgba(255,255,255,0.45);
+  font-size: 0.6rem;
+  font-family: Inter, sans-serif;
   cursor: pointer;
-  transition: all 0.2s;
+  position: relative;
+  transition: color 0.2s;
 }
 
-@media (max-width: 860px) {
-  .dashboard-sidebar {
-    position: relative;
-    width: 100%;
-    height: auto;
-    border-right: none;
-    padding: 1.25rem 1rem 1rem;
-  }
+.dashboard-mobile-nav button.active {
+  color: #f87171;
+}
+
+.dashboard-mobile-nav button .mob-icon {
+  font-size: 1.2rem;
+}
+
+.dashboard-mobile-nav button .mob-badge {
+  position: absolute;
+  top: 4px;
+  right: calc(50% - 18px);
+  background: #c41e3a;
+  color: white;
+  font-size: 0.55rem;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 10px;
+  min-width: 16px;
+  text-align: center;
+}
+
+/* ── OVERVIEW STATS GRID ── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: #1a1a1a;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px;
+  padding: 1.25rem;
+}
+
+/* ── PRODUCTS/ADS TWO-COL ── */
+.dashboard-two-col {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.dashboard-two-col-ads {
+  display: grid;
+  grid-template-columns: 1.3fr 0.9fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* ── ORDERS TABLE ── */
+.orders-table-wrap {
+  background: #1a1a1a;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.07);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.orders-table-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  min-width: 500px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .dashboard-page { display: block; }
+
+  .dashboard-sidebar { display: none; }
 
   .dashboard-main {
     margin-left: 0;
-    padding: 1rem;
+    padding: 1rem 1rem 5rem;
   }
 
-  .dashboard-topbar {
-    padding: 1rem;
-    flex-direction: column;
-    align-items: stretch;
+  .dashboard-mobile-nav { display: flex; }
+
+  .dashboard-topbar { display: none; }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
   }
 
-  .dashboard-tabs {
-    width: 100%;
+  .dashboard-two-col,
+  .dashboard-two-col-ads {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-main { padding: 0.875rem 0.875rem 5rem; }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.625rem;
   }
 
-  .dashboard-nav button {
-    font-size: 0.9rem;
-  }
+  .stat-card { padding: 1rem; }
 }
