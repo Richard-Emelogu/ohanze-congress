@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import './Dashboard.css';
 
 const API_URL = (() => {
   if (process.env.REACT_APP_API_URL) {
@@ -217,7 +218,7 @@ export default function Dashboard() {
   ];
 
   return (
-    <div style={{ minHeight:'100vh', background:'#0d0d0d', fontFamily:'Inter,sans-serif', color:'white' }}>
+    <div className="dashboard-page">
 
       {/* Toast */}
       {toast && (
@@ -231,10 +232,7 @@ export default function Dashboard() {
       )}
 
       {/* Sidebar */}
-      <div style={{ position:'fixed', left:0, top:0, bottom:0, width:240,
-        background:'linear-gradient(180deg,#1a0000 0%,#0d0d0d 100%)',
-        borderRight:'1px solid rgba(255,255,255,0.06)', padding:'2rem 1rem',
-        display:'flex', flexDirection:'column', zIndex:100 }}>
+      <div className="dashboard-sidebar">
 
         {/* Logo */}
         <div style={{ display:'flex', alignItems:'center', gap:12, marginBottom:'2.5rem', padding:'0 0.5rem' }}>
@@ -252,22 +250,18 @@ export default function Dashboard() {
         </div>
 
         {/* Nav */}
-        <nav style={{ flex:1 }}>
+        <nav className="dashboard-nav">
           {tabs.map(t => (
-            <button key={t.id} onClick={() => setTab(t.id)}
-              style={{ width:'100%', display:'flex', alignItems:'center', gap:12,
-                padding:'0.75rem 1rem', borderRadius:10, border:'none', cursor:'pointer',
-                marginBottom:4, position:'relative', textAlign:'left',
-                background: tab===t.id ? 'rgba(196,30,58,0.18)' : 'transparent',
-                color: tab===t.id ? '#f87171' : 'rgba(255,255,255,0.55)',
-                fontWeight: tab===t.id ? 600 : 400, fontSize:'0.88rem',
-                transition:'all 0.2s' }}>
+            <button
+              key={t.id}
+              type="button"
+              className={t.id === tab ? 'active' : ''}
+              onClick={() => setTab(t.id)}
+            >
               <span style={{ fontSize:'1.1rem' }}>{t.icon}</span>
               {t.label}
               {t.badge > 0 && (
-                <span style={{ marginLeft:'auto', background:'#c41e3a', color:'white',
-                  fontSize:'0.7rem', fontWeight:700, padding:'2px 7px',
-                  borderRadius:20, minWidth:20, textAlign:'center' }}>
+                <span className="badge">
                   {t.badge}
                 </span>
               )}
@@ -299,10 +293,10 @@ export default function Dashboard() {
       </div>
 
       {/* Main Content */}
-      <div style={{ marginLeft:240, padding:'2rem' }}>
+      <div className="dashboard-main">
 
         {/* Top Nav Bar */}
-        <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', flexWrap:'wrap', gap:'1rem', marginBottom:'1.5rem', padding:'1rem 1.25rem', background:'rgba(255,255,255,0.03)', border:'1px solid rgba(255,255,255,0.08)', borderRadius:18 }}>
+        <div className="dashboard-topbar">
           <div style={{ display:'flex', alignItems:'center', gap:'1rem' }}>
             <div style={{ width:48, height:48, borderRadius:'14px', background:'linear-gradient(135deg,#c41e3a,#7a0a0a)', display:'grid', placeItems:'center', color:'white', fontWeight:700, fontSize:'1.1rem' }}>
               A

@@ -13,6 +13,22 @@ import walk7 from '../assets/images/walk7.jpg';
 import walk8 from '../assets/images/walk8.jpg';
 import walk9 from '../assets/images/walk9.jpg';
 import walk10 from '../assets/images/walk10.jpg';
+import photo1 from '../assets/images/photo1.jpg';
+import photo2 from '../assets/images/photo2.jpg';
+import photo3 from '../assets/images/photo3.jpg';
+import photo4 from '../assets/images/photo4.jpg';
+import photo5 from '../assets/images/photo5.jpg';
+import photo6 from '../assets/images/photo6.jpg';
+import photo7 from '../assets/images/photo7.jpg';
+import photo8 from '../assets/images/photo8.jpg';
+import photo9 from '../assets/images/photo9.jpg';
+import photo10 from '../assets/images/photo10.jpg';
+import photo13 from '../assets/images/photo13.jpg';
+import photo14 from '../assets/images/photo14.jpg';
+import photo15 from '../assets/images/photo15.jpg';
+import photo16 from '../assets/images/photo16.jpg';
+import photo17 from '../assets/images/photo17.jpg';
+import photo18 from '../assets/images/photo18.jpg';
 
 const YOUTUBE_CHANNEL = 'https://www.youtube.com/@YourChannelHere';
 
@@ -30,56 +46,42 @@ const galleryImages = [
   { id: 11, src: walk8, title: 'Annual Fitness Walk', description: 'Members in action during our yearly walk' },
   { id: 12, src: walk9, title: 'Football Cup', description: 'Cup presented by President 2025: Engr. Solomon Ohia' },
   { id: 13, src: walk10, title: 'Final Walk Session', description: 'Concluding our fitness activities for the season' },
+  { id: 14, src: photo1, title: 'Foundation Ceremony 1', description: 'The official foundation-laying ceremony for the new ICT Center in Ohanze' },
+  { id: 15, src: photo2, title: 'Foundation Ceremony 2', description: 'Leaders and community members gather for the Secretariat groundbreaking' },
+  { id: 16, src: photo3, title: 'Foundation Ceremony 3', description: 'Ceremonial stones are laid to begin construction of the new ICT hub' },
+  { id: 17, src: photo4, title: 'Foundation Ceremony 4', description: "Officials and guests celebrate the progress of Ohanze Congress' future home" },
+  { id: 18, src: photo5, title: 'Foundation Ceremony 5', description: 'The Secretariat foundation ceremony with prayers and dedication' },
+  { id: 19, src: photo6, title: 'Foundation Ceremony 6', description: 'Community leaders plant the first markers for the ICT Center' },
+  { id: 20, src: photo7, title: 'Foundation Ceremony 7', description: 'Hands join together as the new Secretariat project begins' },
+  { id: 21, src: photo8, title: 'Foundation Ceremony 8', description: 'A moment of unity and purpose during the Secretariat groundbreaking' },
+  { id: 22, src: photo9, title: 'Foundation Ceremony 9', description: 'The Ohanze Congress ICT Center foundation-laying event in full view' },
+  { id: 23, src: photo10, title: 'Foundation Ceremony 10', description: 'Ceremonial speeches and community support for the development project' },
+  { id: 24, src: photo13, title: 'Foundation Ceremony 13', description: 'The groundbreaking for the new Secretariat office building' },
+  { id: 25, src: photo14, title: 'Foundation Ceremony 14', description: 'Delegates and dignitaries mark this milestone for the club' },
+  { id: 26, src: photo15, title: 'Foundation Ceremony 15', description: 'A strong start for the ICT Center and Secretariat project with Engr. Solomon Ohia' },
+  { id: 27, src: photo16, title: 'Foundation Ceremony 16', description: 'Ohanze Congress members celebrate the future Secretariat foundation' },
+  { id: 28, src: photo17, title: 'Foundation Ceremony 17', description: 'A powerful display of community and infrastructure development' },
+  { id: 29, src: photo18, title: 'Foundation Ceremony 18', description: "Closing image showcasing the beginning of Ohanze Congress's new facility" },
 ];
 
-/* 
-  YOUTUBE VIDEOS
-  Replace each videoId with your actual YouTube video IDs.
-  A YouTube video ID looks like: dQw4w9WgXcQ
-  Get it from the video URL: youtube.com/watch?v=XXXXXXXXXX
-*/
 const videos = [
-  {
-    id: 1,
-    videoId: 'lYO8YQGOobA',
-    title: '2025 OHANZE CITY WALK PART 1',
-    date: '2025',
-  },
-  {
-    id: 2,
-    videoId: 'qrrJoXEKmOU',
-    title: '2025 OHANZE CITY WALK PART 2',
-    date: '2025',
-  },
-  {
-    id: 3,
-    videoId: 'iGF98cSMVW0',
-    title: '2025 OHANZE CITY WALK PART 3',
-    date: '2025',
-  },
-  {
-    id: 4,
-    videoId: 'XZeD6SMLCSM',
-    title: 'Ohanze City Walk 2022',
-    date: '2022',
-  },
+  { id: 1, videoId: 'lYO8YQGOobA', title: '2025 Ohanze City Walk Part 1', date: '2025' },
+  { id: 2, videoId: 'qrrJoXEKmOU', title: '2025 Ohanze City Walk Part 2', date: '2025' },
+  { id: 3, videoId: 'iGF98cSMVW0', title: '2025 Ohanze City Walk Part 3', date: '2025' },
+  { id: 4, videoId: 'XZeD6SMLCSM', title: 'Ohanze City Walk 2022', date: '2022' },
 ];
 
 function Gallery() {
   const [activeTab, setActiveTab] = useState('videos');
 
-  const getThumb = (videoId) =>
-    `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-
-  const getVideoUrl = (videoId) =>
-    `https://www.youtube.com/watch?v=${videoId}`;
+  const getThumb = (videoId) => `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+  const getVideoUrl = (videoId) => `https://www.youtube.com/watch?v=${videoId}`;
 
   return (
     <div className="gallery">
-
       <div className="page-hero">
         <h1>Our Gallery</h1>
-        <p>Moments, memories and videos from August 93 Club — Ohanze Congress</p>
+        <p>Moments, memories and the foundation-laying ceremony for the new ICT Center and Secretariat at Ohanze Congress.</p>
       </div>
 
       <div className="gallery-tabs">
@@ -87,13 +89,13 @@ function Gallery() {
           className={`gallery-tab ${activeTab === 'photos' ? 'active' : ''}`}
           onClick={() => setActiveTab('photos')}
         >
-          📷 Photos
+          Photos
         </button>
         <button
           className={`gallery-tab ${activeTab === 'videos' ? 'active' : ''}`}
           onClick={() => setActiveTab('videos')}
         >
-          ▶ Videos
+          Videos
         </button>
       </div>
 

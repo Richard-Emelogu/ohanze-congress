@@ -1,5 +1,26 @@
 .gallery { min-height: 100vh; background: #faf9f7; }
 
+.page-hero {
+  padding: 4rem 2rem 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.page-hero h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  margin-bottom: 0.8rem;
+  color: #1a1a1a;
+}
+
+.page-hero p {
+  color: #5a5a5a;
+  max-width: 760px;
+  margin: 0 auto;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
 /* ── TABS ── */
 .gallery-tabs {
   background: white;
@@ -258,6 +279,67 @@
   height: 22px;
   fill: white;
 }
+
+@media (max-width: 900px) {
+  .gallery-tabs {
+    padding: 0 1rem;
+  }
+
+  .gallery-tab {
+    flex: 1;
+    min-width: 0;
+    padding: 0.85rem 1rem;
+    font-size: 0.88rem;
+  }
+
+  .photos-section,
+  .videos-section {
+    padding: 2.5rem 1rem 3rem;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+
+  .video-card {
+    min-height: 100%;
+  }
+}
+
+@media (max-width: 680px) {
+  .gallery-tabs {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    top: 64px;
+  }
+
+  .page-hero {
+    padding: 3rem 1rem 1rem;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-image {
+    height: 210px;
+  }
+
+  .videos-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .youtube-cta {
+    padding: 2rem 1.25rem;
+  }
+
+  .yt-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.95rem 1rem;
+  }
+}
+
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
