@@ -41,18 +41,24 @@ const galleryImages = [
 const videos = [
   {
     id: 1,
+    videoId: 'lYO8YQGOobA',
+    title: '2025 OHANZE CITY WALK PART 1',
+    date: '2025',
+  },
+  {
+    id: 2,
     videoId: 'qrrJoXEKmOU',
     title: '2025 OHANZE CITY WALK PART 2',
     date: '2025',
   },
   {
-    id: 2,
+    id: 3,
     videoId: 'iGF98cSMVW0',
     title: '2025 OHANZE CITY WALK PART 3',
     date: '2025',
   },
   {
-    id: 3,
+    id: 4,
     videoId: 'XZeD6SMLCSM',
     title: 'Ohanze City Walk 2022',
     date: '2022',

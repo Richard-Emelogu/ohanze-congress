@@ -1,6 +1,18 @@
 import React, { useEffect, useState, useCallback } from 'react';
 
-const API_URL = 'http://localhost:5002/api'; 
+const API_URL = (() => {
+  if (process.env.REACT_APP_API_URL) {
+    return process.env.REACT_APP_API_URL;
+  }
+  const host = window.location.hostname;
+  const protocol = window.location.protocol;
+  const isLocalHost = host === 'localhost' || host === '127.0.0.1';
+  const isLocalIp = /^\d+\.\d+\.\d+\.\d+$/.test(host);
+  if (isLocalHost || isLocalIp) {
+    return `${protocol}//${host}:5002/api`;
+  }
+  return `${protocol}//${host}/api`;
+})();
 
 const token = () => localStorage.getItem('token');
 

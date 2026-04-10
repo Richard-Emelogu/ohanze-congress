@@ -73,7 +73,7 @@ async function sendNotificationEmail(subject, text, to = NOTIFY_EMAIL) {
   }
 }
 
-app.use(cors({ origin: ['http://localhost:3000', 'http://localhost:3001'] }));
+app.use(cors({ origin: true }));
 app.use(express.json());
 app.use('/uploads', express.static(UPLOAD_DIR));
 
@@ -81,8 +81,8 @@ const users = [
   {
     id: '1',
     name: 'Admin User',
-    email: 'admin@example.com',
-    passwordHash: bcrypt.hashSync('password123', 10),
+    email: 'admin@ohanze.com',
+    passwordHash: bcrypt.hashSync('Ohanze@2025', 10),
     role: 'admin'
   }
 ];
@@ -333,6 +333,6 @@ app.use((req, res) => {
   res.status(404).json({ message: 'Server error: route not found.' });
 });
 
-app.listen(PORT, () => {
-  console.log(`Backend server running on http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Backend server running on 0.0.0.0:${PORT}`);
 });

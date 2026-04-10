@@ -21,7 +21,7 @@ function App() {
           <Route path="/store" element={<><Header /><Store /></>} />
           <Route path="/admin/login" element={<><Header /><AdminLogin /></>} />
           <Route path="/admin/register" element={<><Header /><AdminRegister /></>} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={<><Header /><Dashboard /></>} />
         </Routes>
       </div>
     </Router>

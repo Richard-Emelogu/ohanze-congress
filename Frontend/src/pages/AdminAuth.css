@@ -257,7 +257,7 @@
 
 .auth-input-wrap input {
   width: 100%;
-  padding: 0.82rem 1rem 0.82rem 42px;
+  padding: 0.82rem 3.5rem 0.82rem 42px;
   border: 1.5px solid #ebebeb;
   border-radius: 10px;
   font-size: 0.92rem;
@@ -280,6 +280,30 @@
 }
 
 .auth-input-wrap:focus-within svg { color: #c41e3a; }
+
+.auth-password-toggle {
+  position: absolute;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+}
+
+.auth-password-toggle:hover {
+  color: #c41e3a;
+}
+
+.auth-password-toggle svg {
+  display: block;
+}
 
 .auth-textarea {
   width: 100%; padding: 0.82rem 1rem;

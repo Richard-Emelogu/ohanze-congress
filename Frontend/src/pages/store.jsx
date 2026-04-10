@@ -1,7 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import './store.css';
 
-const API_URL = 'http://localhost:5002/api';
+const API_URL = (() => {
+  if (process.env.REACT_APP_API_URL) {
+    return process.env.REACT_APP_API_URL;
+  }
+  const host = window.location.hostname;
+  const protocol = window.location.protocol;
+  const isLocalHost = host === 'localhost' || host === '127.0.0.1';
+  const isLocalIp = /^\d+\.\d+\.\d+\.\d+$/.test(host);
+  if (isLocalHost || isLocalIp) {
+    return `${protocol}//${host}:5002/api`;
+  }
+  return `${protocol}//${host}/api`;
+})();
 
 const CATEGORY_LABELS = {
   all: 'All Products',
@@ -24,16 +36,22 @@ export default function Store() {
   const [checkoutError, setCheckoutError] = useState('');
   const [checkoutSuccess, setCheckoutSuccess] = useState('');
   const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [fetchError, setFetchError] = useState('');
 
   useEffect(() => { fetchProducts(); fetchAds(); }, []);
 
   const fetchProducts = async () => {
     try {
       const res = await fetch(`${API_URL}/products`);
+      if (!res.ok) {
+        throw new Error(`Server error ${res.status}`);
+      }
       const data = await res.json();
       setProducts(data);
+      setFetchError('');
     } catch (e) {
       console.error('Error fetching products:', e);
+      setFetchError('Unable to load products. Please check your backend server or API URL.');
     } finally {
       setLoading(false);
     }
@@ -157,7 +175,18 @@ export default function Store() {
         </div>
 
         {/* PRODUCTS */}
-        {filteredProducts.length === 0 ? (
+        {fetchError ? (
+          <div className="store-empty">
+            <div className="store-empty-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ccc" strokeWidth="1.5">
+                <path d="M12 3v18" strokeLinecap="round" />
+                <path d="M3 12h18" strokeLinecap="round" />
+              </svg>
+            </div>
+            <h3>Unable to load products</h3>
+            <p>{fetchError}</p>
+          </div>
+        ) : filteredProducts.length === 0 ? (
           <div className="store-empty">
             <div className="store-empty-icon">
               <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ccc" strokeWidth="1.5">
