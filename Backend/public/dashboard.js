@@ -43,7 +43,7 @@ function setupEventListeners() {
     // Image URL preview
     document.getElementById('productImageUrl').addEventListener('input', previewImage);
 
-    // Click outside modal to close
+    //You click outside modal to close 
     window.addEventListener('click', (e) => {
         const modal = document.getElementById('productModal');
         if (e.target === modal) {

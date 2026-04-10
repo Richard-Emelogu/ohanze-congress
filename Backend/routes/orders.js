@@ -4,21 +4,15 @@ const Order = require('../models/Order');
 const auth = require('../middleware/auth');
 const { sendNewOrderNotification, sendOrderConfirmation } = require('../emailService');
 
-// @route   POST api/orders
-// @desc    Create a new order (with email notifications!)
-// @access  Public
+// @route  POST api/orders
+// @access Public
 router.post('/', async (req, res) => {
   try {
-    const newOrder = new Order(req.body);
-    const order = newOrder.save();
+    const order = new Order(req.body);
+    await order.save();
 
-    // 📧 SEND EMAIL NOTIFICATIONS
-    console.log('📧 Sending email notifications...');
-    
-    // Send email to admin (won't fail if email not configured)
+    // Send email notifications
     await sendNewOrderNotification(order);
-    
-    // Send confirmation email to customer (won't fail if email not configured)
     await sendOrderConfirmation(order);
 
     res.json({
@@ -28,19 +22,15 @@ router.post('/', async (req, res) => {
     });
   } catch (err) {
     console.error(err.message);
-    res.status(500).json({
-      success: false,
-      message: 'Server error'
-    });
+    res.status(500).json({ success: false, message: 'Server error' });
   }
 });
 
-// @route   GET api/orders
-// @desc    Get all orders (Admin only)
-// @access  Private
+// @route  GET api/orders
+// @access Private
 router.get('/', auth, async (req, res) => {
   try {
-    const orders = Order.findAll();
+    const orders = await Order.find().sort({ createdAt: -1 });
     res.json(orders);
   } catch (err) {
     console.error(err.message);
@@ -48,12 +38,31 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
-// @route   GET api/orders/:id
-// @desc    Get order by ID
-// @access  Private
+// @route  GET api/orders/stats/summary
+// @access Private
+router.get('/stats/summary', auth, async (req, res) => {
+  try {
+    const orders = await Order.find();
+    const stats = {
+      totalOrders: orders.length,
+      pendingOrders: orders.filter(o => o.status === 'pending').length,
+      completedOrders: orders.filter(o => o.status === 'completed').length,
+      totalRevenue: orders
+        .filter(o => o.paymentStatus === 'paid')
+        .reduce((sum, o) => sum + o.totalAmount, 0)
+    };
+    res.json(stats);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
+
+// @route  GET api/orders/:id
+// @access Private
 router.get('/:id', auth, async (req, res) => {
   try {
-    const order = Order.findById(req.params.id);
+    const order = await Order.findById(req.params.id);
     if (!order) {
       return res.status(404).json({ message: 'Order not found' });
     }
@@ -64,49 +73,31 @@ router.get('/:id', auth, async (req, res) => {
   }
 });
 
-// @route   PUT api/orders/:id
-// @desc    Update order status
-// @access  Private
+// @route  PUT api/orders/:id
+// @access Private
 router.put('/:id', auth, async (req, res) => {
   try {
-    const order = Order.updateById(req.params.id, req.body);
+    const order = await Order.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
     if (!order) {
       return res.status(404).json({ message: 'Order not found' });
     }
-    res.json({
-      success: true,
-      message: 'Order updated successfully',
-      order
-    });
+    res.json({ success: true, message: 'Order updated successfully', order });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');
   }
 });
 
-// @route   DELETE api/orders/:id
-// @desc    Delete an order
-// @access  Private
+// @route  DELETE api/orders/:id
+// @access Private
 router.delete('/:id', auth, async (req, res) => {
   try {
-    Order.deleteById(req.params.id);
-    res.json({ 
-      success: true,
-      message: 'Order deleted successfully' 
-    });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server error');
-  }
-});
-
-// @route   GET api/orders/stats/summary
-// @desc    Get sales statistics
-// @access  Private
-router.get('/stats/summary', auth, async (req, res) => {
-  try {
-    const stats = Order.getStats();
-    res.json(stats);
+    await Order.findByIdAndDelete(req.params.id);
+    res.json({ success: true, message: 'Order deleted successfully' });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');

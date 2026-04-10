@@ -5,134 +5,74 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const auth = require('../middleware/auth');
 
-// @route   POST api/auth/register
-// @desc    Register a new admin user
-// @access  Public
+// Register (pending approval)
 router.post('/register', async (req, res) => {
-  const { name, email, password, role } = req.body;
-
   try {
-    // Check if user exists
-    const existingUser = User.findByEmail(email);
-    if (existingUser) {
-      return res.status(400).json({ message: 'User already exists' });
-    }
-
-    // Hash password
+    const { name, email, password, role } = req.body;
+    let user = await User.findOne({ email });
+    if (user) return res.status(400).json({ message: 'User already exists.' });
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-
-    // Create new user
-    const user = new User(name, email, hashedPassword, role || 'admin');
-    user.save();
-
-    // Create JWT payload
-    const payload = {
-      user: {
-        id: user.id,
-        role: user.role
-      }
-    };
-
-    // Sign token
-    jwt.sign(
-      payload,
-      process.env.JWT_SECRET,
-      { expiresIn: '7d' },
-      (err, token) => {
-        if (err) throw err;
-        res.json({
-          token,
-          user: {
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            role: user.role
-          }
-        });
-      }
-    );
+    user = new User({ name, email, password: hashedPassword, role: role || 'admin', status: 'pending' });
+    await user.save();
+    res.status(201).json({ message: 'Registration successful. Awaiting approval.' });
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server error');
+    res.status(500).json({ message: 'Server error.' });
   }
 });
 
-// @route   POST api/auth/login
-// @desc    Login admin user
-// @access  Public
+// Login (only approved users)
 router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-
   try {
-    // Check if user exists
-    const user = User.findByEmail(email);
-    if (!user) {
-      return res.status(400).json({ message: 'Invalid credentials' });
-    }
-
-    // Check password
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) return res.status(400).json({ message: 'Invalid credentials.' });
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ message: 'Invalid credentials' });
-    }
-
-    // Create JWT payload
-    const payload = {
-      user: {
-        id: user.id,
-        role: user.role
-      }
-    };
-
-    // Sign token
-    jwt.sign(
-      payload,
-      process.env.JWT_SECRET,
-      { expiresIn: '7d' },
-      (err, token) => {
-        if (err) throw err;
-        res.json({
-          token,
-          user: {
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            role: user.role
-          }
-        });
-      }
-    );
+    if (!isMatch) return res.status(400).json({ message: 'Invalid credentials.' });
+    if (user.status !== 'approved') return res.status(403).json({ message: 'Your account is pending approval.' });
+    const payload = { user: { id: user.id, role: user.role } };
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '7d' });
+    res.json({ token, user: { id: user.id, name: user.name, email: user.email, role: user.role } });
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server error');
+    res.status(500).json({ message: 'Server error.' });
   }
 });
 
-// @route   GET api/auth/me
-// @desc    Get current user
-// @access  Private
-// @route   GET api/auth/me
-// @desc    Get current user
-// @access  Private
-router.get('/me', auth, (req, res) => {
+router.get('/me', auth, async (req, res) => {
   try {
-    const user = User.findById(req.user.id);
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-    
-    // Return user without password
-    res.json({
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      role: user.role,
-      createdAt: user.createdAt
-    });
+    const user = await User.findById(req.user.id).select('-password');
+    res.json(user);
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server error');
+    res.status(500).json({ message: 'Server error.' });
+  }
+});
+
+router.get('/pending', auth, async (req, res) => {
+  try {
+    const users = await User.find({ status: 'pending' }).select('-password');
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ message: 'Server error.' });
+  }
+});
+
+router.patch('/approve/:id', auth, async (req, res) => {
+  try {
+    const user = await User.findByIdAndUpdate(req.params.id, { status: 'approved' }, { new: true }).select('-password');
+    if (!user) return res.status(404).json({ message: 'User not found.' });
+    res.json({ message: `${user.name} has been approved.`, user });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error.' });
+  }
+});
+
+router.patch('/reject/:id', auth, async (req, res) => {
+  try {
+    const user = await User.findByIdAndUpdate(req.params.id, { status: 'rejected' }, { new: true }).select('-password');
+    if (!user) return res.status(404).json({ message: 'User not found.' });
+    res.json({ message: `${user.name} has been rejected.`, user });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error.' });
   }
 });
 

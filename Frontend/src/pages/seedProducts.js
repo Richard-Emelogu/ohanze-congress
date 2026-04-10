@@ -37,6 +37,30 @@ const products = [
     stock: 30,
     createdAt: new Date().toISOString()
   },
+  // NEW: WALK8 POLO
+  {
+    id: Date.now().toString() + '15',
+    name: 'Walk8 Anniversary Polo - Navy Blue',
+    description: 'Commemorative Walk8 edition polo celebrating unity and progress. Premium cotton with Walk8 embroidered logo. Official August 93 Congress collection.',
+    price: 19500,
+    category: 'polo',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    imageUrl: 'https://m.media-amazon.com/images/I/71kNzKj3v-L._AC_UY1000_.jpg',
+    stock: 40,
+    createdAt: new Date().toISOString()
+  },
+  // NEW: WALK10 POLO
+  {
+    id: Date.now().toString() + '16',
+    name: 'Walk10 Elite Polo - Royal Blue',
+    description: 'Exclusive Walk10 milestone polo. Premium performance fabric with moisture-wicking technology. Limited Walk10 commemorative edition with gold detailing.',
+    price: 21000,
+    category: 'polo',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    imageUrl: 'https://m.media-amazon.com/images/I/71eHzKmz5tL._AC_UY1000_.jpg',
+    stock: 35,
+    createdAt: new Date().toISOString()
+  },
 
   // CAPS
   {
@@ -195,6 +219,7 @@ function seedProducts() {
     console.log(`  📿 Bangles: ${products.filter(p => p.category === 'bangle').length}`);
     console.log(`  🎁 Accessories: ${products.filter(p => p.category === 'accessory').length}`);
     console.log('');
+    console.log('🎉 NEW: Walk8 and Walk10 commemorative polos added!');
     console.log('🚀 You can now view these products at: http://localhost:3000/store');
     
   } catch (error) {

@@ -1,8 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const fs = require('fs');
-const path = require('path');
+const mongoose = require('mongoose');
 
 dotenv.config();
 
@@ -12,56 +11,30 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
-const dbPath = path.join(__dirname, 'database.json');
+// Connect to MongoDB
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('✅ MongoDB connected successfully'))
+  .catch((error) => {
+    console.error('❌ MongoDB connection failed:', error.message);
+    process.exit(1);
+  });
 
-if (!fs.existsSync(dbPath)) {
-  fs.writeFileSync(dbPath, JSON.stringify({ users: [], orders: [], products: [] }, null, 2));
-  console.log('Created database.json');
-}
+// ✅ Mount auth routes (the only ones we need for now)
+const authRoutes = require('./routes/auth');
+app.use('/api/auth', authRoutes);
+console.log('✅ Auth routes mounted at /api/auth');
 
-global.db = {
-  read: () => {
-    try {
-      const data = fs.readFileSync(dbPath, 'utf8');
-      return JSON.parse(data);
-    } catch (error) {
-      console.error('Error reading database:', error);
-      return { users: [], orders: [], products: [] };
-    }
-  },
-  write: (data) => {
-    try {
-      fs.writeFileSync(dbPath, JSON.stringify(data, null, 2));
-    } catch (error) {
-      console.error('Error writing database:', error);
-    }
-  }
-};
-
-console.log('Using File-Based Storage');
-
-// Load routes
-try {
-  const authRoutes = require('./routes/auth');
-  const ordersRoutes = require('./routes/orders');
-  const productsRoutes = require('./routes/products');
-  
-  app.use('/api/auth', authRoutes);
-  app.use('/api/orders', ordersRoutes);
-  app.use('/api/products', productsRoutes);
-  
-  console.log('✅ Routes loaded successfully');
-} catch (error) {
-  console.error('❌ Error loading routes:', error.message);
-}
+// Test route
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
 
 app.get('/', (req, res) => {
   res.json({ message: 'Ohanze Congress API is running' });
 });
 
-const PORT = process.env.PORT || 5000;
-
+const PORT = process.env.PORT || 5002;
 app.listen(PORT, () => {
-  console.log('🚀 Server running on port ' + PORT);
-  console.log('📍 Visit: http://localhost:' + PORT);
+  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`📍 Visit: http://localhost:${PORT}`);
 });

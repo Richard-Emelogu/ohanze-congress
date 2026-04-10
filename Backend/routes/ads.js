@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const cloudinary = require('cloudinary').v2;
-const Product = require('../models/Product');
+const Ad = require('../models/Ad');
 const auth = require('../middleware/auth');
 
 cloudinary.config({
@@ -14,26 +14,26 @@ cloudinary.config({
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-// GET all products (public)
+// GET all active ads (public)
 router.get('/', async (req, res) => {
   try {
-    const products = await Product.find().sort({ createdAt: -1 });
-    res.json(products);
+    const ads = await Ad.find({ active: true }).sort({ createdAt: -1 });
+    res.json(ads);
   } catch (err) {
     res.status(500).send('Server error');
   }
 });
-
-// POST new product (admin only)
+ 
+// POST new ad (admin only)
 router.post('/', auth, upload.single('image'), async (req, res) => {
   try {
-    const { name, price, description } = req.body;
+    const { title, description, link } = req.body;
     let image = '', imagePublicId = '';
 
     if (req.file) {
       const result = await new Promise((resolve, reject) => {
         cloudinary.uploader.upload_stream(
-          { folder: 'ohanze-products' },
+          { folder: 'ohanze-ads' },
           (error, result) => error ? reject(error) : resolve(result)
         ).end(req.file.buffer);
       });
@@ -41,24 +41,21 @@ router.post('/', auth, upload.single('image'), async (req, res) => {
       imagePublicId = result.public_id;
     }
 
-    const product = new Product({ name, price, description, image, imagePublicId });
-    await product.save();
-    res.json({ success: true, product });
+    const ad = new Ad({ title, description, image, link, imagePublicId });
+    await ad.save();
+    res.json({ success: true, ad });
   } catch (err) {
-    console.error(err);
     res.status(500).send('Server error');
   }
 });
 
-// DELETE product (admin only)
+// DELETE ad (admin only)
 router.delete('/:id', auth, async (req, res) => {
   try {
-    const product = await Product.findById(req.params.id);
-    if (!product) return res.status(404).json({ message: 'Product not found' });
-    if (product.imagePublicId) {
-      await cloudinary.uploader.destroy(product.imagePublicId);
-    }
-    await Product.findByIdAndDelete(req.params.id);
+    const ad = await Ad.findById(req.params.id);
+    if (!ad) return res.status(404).json({ message: 'Ad not found' });
+    if (ad.imagePublicId) await cloudinary.uploader.destroy(ad.imagePublicId);
+    await Ad.findByIdAndDelete(req.params.id);
     res.json({ success: true });
   } catch (err) {
     res.status(500).send('Server error');

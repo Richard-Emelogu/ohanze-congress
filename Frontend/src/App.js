@@ -7,20 +7,21 @@ import Gallery from './pages/Gallery';
 import Store from './pages/store';
 import AdminLogin from './pages/AdminLogin';
 import AdminRegister from './pages/AdminRegister';
+import Dashboard from './pages/Dashboard';
 import './App.css';
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/leadership" element={<Leadership />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/store" element={<Store />} />
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin/register" element={<AdminRegister />} />
+          <Route path="/" element={<><Header /><Home /></>} />
+          <Route path="/leadership" element={<><Header /><Leadership /></>} />
+          <Route path="/gallery" element={<><Header /><Gallery /></>} />
+          <Route path="/store" element={<><Header /><Store /></>} />
+          <Route path="/admin/login" element={<><Header /><AdminLogin /></>} />
+          <Route path="/admin/register" element={<><Header /><AdminRegister /></>} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </div>
     </Router>

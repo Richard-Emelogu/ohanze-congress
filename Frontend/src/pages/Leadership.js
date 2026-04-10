@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Leadership.css';
 
-// Import ALL leader images (1-48)
 import leader1 from '../assets/images/leader1.jpg';
 import leader2 from '../assets/images/leader2.jpg';
 import leader3 from '../assets/images/leader3.jpg';
@@ -41,7 +40,6 @@ import leader38 from '../assets/images/leader38.jpg';
 import leader39 from '../assets/images/leader39.jpg';
 import leader40 from '../assets/images/leader40.jpg';
 import leader41 from '../assets/images/leader41.jpg';
-// import leader42 from '../assets/images/leader42.jpg';
 import leader43 from '../assets/images/leader43.jpg';
 import leader44 from '../assets/images/leader44.jpg';
 import leader45 from '../assets/images/leader45.jpg';
@@ -54,328 +52,121 @@ import leader51 from '../assets/images/leader51.jpg';
 import leader52 from '../assets/images/leader52.jpg';
 import leader53 from '../assets/images/leader53.jpg';
 
+const congressExcos = [
+  { name: 'Engr. Solomon Ohia', position: 'President', image: leader14 },
+  { name: 'Mr. Azubuike Anyanwu', position: 'Vice President', image: leader33 },
+  { name: 'Mr. Ikenna Onumadu', position: 'Secretary-General', image: leader40 },
+  { name: 'Mr. Christian Omeonu', position: 'Director of Finance', image: leader36 },
+  { name: 'Mr. Justice Chimezie Nwakanna', position: 'Director of Community Service', image: leader43 },
+  { name: 'Mr. Kelechi Ojogho', position: 'Director of Welfare', image: leader50 },
+  { name: 'Mr. Chimezie Akpulonu', position: 'Director of Publicity', image: leader37 },
+  { name: 'Barrister Emeka Enwereji', position: 'Sergeant at Arms', image: leader49 },
+  { name: 'Mr. Charles Nwanmah', position: 'Asst. Director of Finance', image: leader46 },
+  { name: 'Mr. Obioma Ochulor', position: 'Asst. Secretary-General', image: leader51 },
+];
+
+const diasporaChapter = [
+  { name: 'Mr. Emenike Ihekoronye', position: 'Coordinator', image: leader12 },
+  { name: 'Mr. Obinna Onyekwere', position: 'Secretary', image: leader35 },
+];
+
+const homeChapter = [
+  { name: 'Mr. Ikechi Eguzoikpe', position: 'Coordinator', image: leader8 },
+  { name: 'Elder Ndudim Adindu', position: 'Deputy Coordinator', image: leader2 },
+];
+
+const lagosChapter = [
+  { name: 'Elder Chamberlain Nwaorgu', position: 'Coordinator', image: leader11 },
+  { name: 'Mr. Prince Nwaekpe', position: 'Deputy Coordinator', image: leader32 },
+];
+
+const delegates = [
+  { name: 'Mr. Ebere Nwakanma', image: leader3 },
+  { name: 'Mr. Aguwamba Munachi', image: leader4 },
+  { name: 'Mr. Nnam Obia', image: leader5 },
+  { name: 'Mr. Tochukwu Emelogu', image: leader52 },
+  { name: 'Mr. Michael Dimiri', image: leader53 },
+  { name: 'Mr. Ihuoma Emelogu', image: leader6 },
+  { name: 'Mr. Nwangwa Ogechi', image: leader7 },
+  { name: 'Mr. Kelechi Imeoria', image: leader9 },
+  { name: 'Mr. Chidi Ojogho', image: leader10 },
+  { name: 'Mr. Onyekachi Dineya', image: leader13 },
+  { name: 'Mr. Nelson Aaron', image: leader15 },
+  { name: 'Mr. Ikechi Aaron', image: leader16 },
+  { name: 'Mrs. Nnenna Uba', image: leader17 },
+  { name: 'Mr. Boniface Nwosu', image: leader18 },
+  { name: 'Mr. Sopuruchi Owen', image: leader19 },
+  { name: 'Mr. Ronald Nwambu', image: leader20 },
+  { name: 'Mr. Stanley Elewachi', image: leader21 },
+  { name: 'Mr. Charles Onuha', image: leader23 },
+  { name: 'Mr. Nkemjika Nnabugwu', image: leader24 },
+  { name: 'Mr. Enyinnaya Ohia', image: leader25 },
+  { name: 'Mr. Goodluck Nwanganga', image: leader26 },
+  { name: 'Mr. Chijindu Amaechi', image: leader27 },
+  { name: 'Mr. Chinwe Ikpeaba', image: leader28 },
+  { name: 'Mr. Nworgu Kenneth', image: leader30 },
+  { name: 'Mrs. Chinwe Emeanuwa', image: leader31 },
+  { name: 'Mr. Kenneth Ochulor', image: leader34 },
+  { name: 'Mrs. Oluchi Atubi', image: leader38 },
+  { name: 'Mr. Ihekoronye Enyeribe', image: leader39 },
+  { name: 'Mrs. Ngozi Atubi', image: leader41 },
+  { name: 'Mr. Chidiadi Alaribe', image: leader44 },
+  { name: 'Mr. Izuchukwu Adindu', image: leader45 },
+  { name: 'Mr. Maraizu Nwoguu', image: leader47 },
+  { name: 'Mr. Ahamefule Emelogu', image: leader48 },
+  { name: 'Mr. Ebere Nwakanma', image: leader1 },
+];
+
+function ChapterSection({ title, members, bg }) {
+  return (
+    <section className="chapter-section" style={{ background: bg }}>
+      <div className="container">
+        <h2 className="section-title">{title}</h2>
+        <div className="chapter-grid">
+          {members.map((leader, i) => (
+            <div key={i} className="chapter-card">
+              <div className="chapter-image-wrapper">
+                <img src={leader.image} alt={leader.name} className="chapter-image" />
+              </div>
+              <div className="chapter-info">
+                <h3>{leader.name}</h3>
+                <p className="position">{leader.position}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Leadership() {
-  // Big 10 Executive Positions (Congress Excos)
-  const congressExcos = [
-    {
-      name: 'Engr.Solomon Ohia',
-      position: 'President',
-      image: leader14,
-    },
-    {
-      name: 'Mr.Azubuike Anyanwu',
-      position: 'Vice President',
-      image: leader33,
-    },
-    {
-      name: 'Mr.Ikenna Onumadu',
-      position: 'Secretary-General',
-      image: leader40,
-    },
-    {
-      name: 'Mr.Christain Omeonu',
-      position: 'Director of Finance',
-      image: leader36,
-    },
-    {
-      name: 'Mr.Justice Chimezie Nwakanna',
-      position: 'Director of community service',
-      image: leader43,
-    },
-    {
-      name: 'Mr.Kelechi Ojogho',
-      position: 'Director of Welfare',
-      image: leader50, 
-    },
-    {
-      name: 'Mr.Chimezie Akpulonu',
-      position: 'Director of Publicity',
-      image: leader37,
-    },
-    {
-      name: 'Barrister Emeka Enwereji',
-      position: 'Sargent of Arms',
-      image: leader49,
-    },
-    {
-      name: 'Mr.Charles Nwanmah',
-      position: 'Assistant Director of Finance',
-      image: leader46,
-    },
-    {
-      name: 'Mr.Obioma Ochulor',
-      position: 'Assistant Secretary-General',
-      image: leader51,
-    }
-  ];
-
-  // Diaspora Chapter
-  const diasporaChapter = [
-    {
-      name: 'Mr.Emenike Ihekoronye',
-      position: 'Coordinator',
-      image: leader12,
-    },
-    {
-      name: 'Mr.Obinna Onyekwere',
-      position: 'Secretary',
-      image: leader35,
-    }
-  ];
-
-  // Home Chapter
-  const homeChapter = [
-    {
-      name: 'Mr.Ikechi Eguzoikpe',
-      position: 'Coordinator',
-      image: leader8,
-    },
-    {
-      name: 'Elder Ndudim Adindu',
-      position: 'Deputy Coordinator',
-      image: leader2,
-    }
-  ];
-
-  // Lagos Chapter
-  const lagosChapter = [
-    {
-      name: 'Elder Chamberlain Nwaorgu',
-      position: 'Coordinator',
-      image: leader11,
-    },
-    {
-      name: 'Mr.Prince Nwaekpe',
-      position: 'Deputy Coordinator',
-      image: leader32,
-    }
-  ];
-
-  // Leadership position images
-  const usedImages = [
-    // Congress Excos
-    leader14, leader33, leader40, leader36, leader43, leader37, leader46, leader49, leader50, leader51,
-    // Diaspora Chapter
-    leader12, leader35,
-    // Home Chapter
-    leader8, leader2,
-    // Lagos Chapter
-    leader11, leader32
-  ].filter(img => img !== null); // Remove null values
-
-  // All Leader Images available
-  const allLeaderImages = [
-    leader1, leader2, leader3, leader4, leader5, leader6, leader7, leader8,
-    leader9, leader10, leader11, leader12, leader13, leader14, leader15, leader16,
-    leader17, leader18, leader19, leader20, leader21, leader23, leader24,
-    leader25, leader26, leader27, leader28, leader30, leader31, leader32,
-    leader33, leader34, leader35, leader36, leader37, leader38, leader39, leader40,
-    leader41, leader43, leader44, leader45, leader46, leader48, leader49, leader50, leader51, leader52, leader53,
-  ];
-
-  // Delegates
-  const delegates = [
-    // {
-    //   name: 'Mr.John Doe',
-    //   position: 'Delegate',
-    //   image: leader1,
-    // },
-    {
-      name: 'Mr.Ebere Nwakanma',
-      position: 'Delegate',
-      image: leader3,
-    },
-    {
-      name: 'Mr.Aguwamba Munachi',
-      position: 'Delegate',
-      image: leader4,
-    },
-     {
-      name: 'Mr.Chinwe Ikpeaba',
-      position: 'Delegate',
-      image: leader28,
-    },
-    {
-      name: 'Mr.Nnam Obia',
-      position: 'Delegate',
-      image: leader5,
-    },
-    {
-      name: 'Mr.Tochukwu Emelogu',
-      position: 'Delegate',
-      image: leader52,
-    },
-    {
-      name: 'Mr.Micheal Dimiri',
-      position: 'Delegate',
-      image: leader53,
-    },
-    {
-      name: 'Mr.Ihuoma Emelogu',
-      position: 'Delegate',
-      image: leader6,
-    },
-    {
-      name: 'Mr.Nwangwa Ogechi',
-      position: 'Delegate',
-      image: leader7,
-    },
-    {
-      name: 'Mr.Kelechi Imeoria',
-      position: 'Delegate',
-      image: leader9,
-    },
-    {
-      name: 'Mr.Chidi Ojogho',
-      position: 'Delegate',
-      image: leader10,
-    },
-    {
-      name: 'Mr.Onyekachi Dineya',
-      position: 'Delegate',
-      image: leader13,
-    },
-    {
-      name: 'Mr.Nelson Aaron',
-      position: 'Delegate',
-      image: leader15,
-    },
-    {
-      name: 'Mr.Ikechi Aaron',
-      position: 'Delegate',
-      image: leader16,
-    },
-    {
-      name: 'Mrs.Nnenna Uba',
-      position: 'Delegate',
-      image: leader17,
-    },
-    {
-      name: 'Mr.Boniface Chinyere Nwosu',
-      position: 'Delegate',
-      image: leader18,
-    },
-    {
-      name: 'Mr.Sopuruchi Owen',
-      position: 'Delegate',
-      image: leader19,
-    },
-    {
-      name: 'Mr.Ronald Nwambu',
-      position: 'Delegate',
-      image: leader20,
-    },
-    {
-      name: 'Mr.Stanley Elewachi',
-      position: 'Delegate',
-      image: leader21,
-    },
-    {
-      name: 'Mr.Charles Onuha',
-      position: 'Delegate',
-      image: leader23,
-    },
-    {
-      name: 'Mr.Nkemjika Nnabugwu',
-      position: 'Delegate',
-      image: leader24,
-    },
-    {
-      name: 'Mr.Enyinnaya Ohia',
-      position: 'Delegate',
-      image: leader25,
-    },
-    {
-      name: 'Mr.Goodluck Nwanganga',
-      position: 'Delegate',
-      image: leader26,
-    },
-    {
-      name: 'Mr.Chijindu Amaechi',
-      position: 'Delegate',
-      image: leader27,
-    },
-    {
-      name: 'Mr.Chinwe Ikpeaba',
-      position: 'Delegate',
-      image: leader28,
-    },
-    {
-      name: 'Mr.Nworgu Kenneth',
-      position: 'Delegate',
-      image: leader30,
-    },
-    {
-      name: 'Mrs.Chinwe Emeanuwa',
-      position: 'Delegate',
-      image: leader31,
-    },
-    {
-      name: 'Mr.Kenneth Ochulor',
-      position: 'Delegate',
-      image: leader34,
-    },
-    {
-      name: 'Mrs.Oluchi Atubi',
-      position: 'Delegate',
-      image: leader38,
-    },
-    {
-      name: 'Mr.Ihekoronye Enyeribe',
-      position: 'Delegate',
-      image: leader39,
-    },
-    {
-      name: 'Mrs.Ngozi Atubi',
-      position: 'Delegate',
-      image: leader41,
-    },
-    {
-      name: 'Mr.Chidiadi Alaribe',
-      position: 'Delegate',
-      image: leader44,
-    },
-    {
-      name: 'Mr.Izuchukwu Adindu',
-      position: 'Delegate',
-      image: leader45,
-    },
-    {
-      name: 'Mr.Maraizu Nwoguu',
-      position: 'Delegate',
-      image: leader47,
-    },
-    {
-      name: 'Mr.Ahamefule Emelogu',
-      position: 'Delegate',
-      image: leader48,
-    }
-  ];
+  const [showAllDelegates, setShowAllDelegates] = useState(false);
+  const visibleDelegates = showAllDelegates ? delegates : delegates.slice(0, 12);
 
   return (
     <div className="leadership">
-      <div className="leadership-hero">
+      <div className="page-hero">
         <h1>Our Leadership</h1>
-        <p>Meet the dedicated team of August 93 Club - Ohanze Congress</p>
+        <p>Meet the dedicated team behind August 93 Club — Ohanze Congress</p>
       </div>
 
-      {/* Congress Excos - Big 10 */}
+      {/* Congress Excos */}
       <section className="executives-section">
         <div className="container">
-          <h2 className="section-title">Congress Excos (Big 10)</h2>
+          <h2 className="section-title">Congress Excos — Big 10</h2>
           <div className="executives-grid">
-            {congressExcos.map((executive, index) => (
-              <div key={index} className="executive-card">
+            {congressExcos.map((exec, i) => (
+              <div key={i} className="executive-card">
                 <div className="executive-image-wrapper">
-                  {executive.image ? (
-                    <img src={executive.image} alt={executive.name} className="executive-image" />
-                  ) : (
-                    <div className="placeholder-image">Image Coming Soon</div>
-                  )}
+                  {exec.image
+                    ? <img src={exec.image} alt={exec.name} className="executive-image" />
+                    : <div className="placeholder-image">Photo coming soon</div>
+                  }
                 </div>
                 <div className="executive-info">
-                  <h3>{executive.name}</h3>
-                  <p className="position">{executive.position}</p>
+                  <h3>{exec.name}</h3>
+                  <p className="position">{exec.position}</p>
                 </div>
               </div>
             ))}
@@ -383,83 +174,49 @@ function Leadership() {
         </div>
       </section>
 
-      {/* Diaspora Chapter Section */}
-      <section className="chapter-section diaspora-chapter">
-        <div className="container">
-          <h2 className="section-title">Diaspora Chapter</h2>
-          <div className="chapter-grid">
-            {diasporaChapter.map((leader, index) => (
-              <div key={index} className="chapter-card">
-                <div className="chapter-image-wrapper">
-                  <img src={leader.image} alt={leader.name} className="chapter-image" />
-                </div>
-                <div className="chapter-info">
-                  <h3>{leader.name}</h3>
-                  <p className="position">{leader.position}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ChapterSection title="Diaspora Chapter" members={diasporaChapter} bg="#ffffff" />
+      <ChapterSection title="Home Chapter" members={homeChapter} bg="#f7f6f4" />
+      <ChapterSection title="Lagos Chapter" members={lagosChapter} bg="#ffffff" />
 
-      {/* Home Chapter Section */}
-      <section className="chapter-section home-chapter">
-        <div className="container">
-          <h2 className="section-title">Home Chapter</h2>
-          <div className="chapter-grid">
-            {homeChapter.map((leader, index) => (
-              <div key={index} className="chapter-card">
-                <div className="chapter-image-wrapper">
-                  <img src={leader.image} alt={leader.name} className="chapter-image" />
-                </div>
-                <div className="chapter-info">
-                  <h3>{leader.name}</h3>
-                  <p className="position">{leader.position}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Lagos Chapter Section */}
-      <section className="chapter-section lagos-chapter">
-        <div className="container">
-          <h2 className="section-title">Lagos Chapter</h2>
-          <div className="chapter-grid">
-            {lagosChapter.map((leader, index) => (
-              <div key={index} className="chapter-card">
-                <div className="chapter-image-wrapper">
-                  <img src={leader.image} alt={leader.name} className="chapter-image" />
-                </div>
-                <div className="chapter-info">
-                  <h3>{leader.name}</h3>
-                  <p className="position">{leader.position}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Delegates Section */}
+      {/* Delegates */}
       <section className="delegates-section">
         <div className="container">
           <h2 className="section-title">Our Delegates</h2>
           <div className="delegates-grid">
-            {delegates.map((delegate, index) => (
-              <div key={index} className="delegate-card">
+            {visibleDelegates.map((d, i) => (
+              <div key={i} className="delegate-card">
                 <div className="delegate-image-wrapper">
-                  <img src={delegate.image} alt={delegate.name} className="delegate-image" />
+                  <img src={d.image} alt={d.name} className="delegate-image" loading="lazy" />
                 </div>
                 <div className="delegate-info">
-                  <h4>{delegate.name}</h4>
-                  <p className="position">{delegate.position}</p>
+                  <h4>{d.name}</h4>
+                  <p className="position">Delegate</p>
                 </div>
               </div>
             ))}
           </div>
+          {delegates.length > 12 && (
+            <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+              <button
+                onClick={() => setShowAllDelegates(!showAllDelegates)}
+                style={{
+                  padding: '0.75rem 2rem',
+                  background: showAllDelegates ? 'transparent' : 'linear-gradient(135deg,#c41e3a,#7a0a0a)',
+                  color: showAllDelegates ? '#7a0a0a' : 'white',
+                  border: '1.5px solid #c41e3a',
+                  borderRadius: '8px',
+                  fontWeight: '700',
+                  fontSize: '0.88rem',
+                  cursor: 'pointer',
+                  fontFamily: 'Inter, sans-serif',
+                  transition: 'all 0.2s',
+                  letterSpacing: '0.3px',
+                }}
+              >
+                {showAllDelegates ? 'Show Less' : `View All ${delegates.length} Delegates`}
+              </button>
+            </div>
+          )}
         </div>
       </section>
     </div>
